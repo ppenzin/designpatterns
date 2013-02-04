@@ -7,6 +7,8 @@
 abstract class Statement {
     abstract String prettyPrint (int depth);
 
+    public isComposite () { return false; }
+
     protected String indentString (String indentText, int repeat) {
     	if (repeat <= 0) {
     		return "";
