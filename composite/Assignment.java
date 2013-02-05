@@ -15,7 +15,7 @@ public class Assignment extends Statement {
 	}
 
 	@Override public String prettyPrint (int depth) {
-		String code = String.format("%s := %s%n", var, expression);
+		String code = String.format("%s := %s", var, expression);
 		return this.indentString("  ", depth) + code;
 	}
 }

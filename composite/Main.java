@@ -1,7 +1,7 @@
 /* Main.java: Driver class for testing the while-language composite classes.
  *
  * Author:   Heath Harrelson <harrel2@pdx.edu>
- * Modified: 2013-01-28
+ * Modified: 2013-02-04
  *
  */
 
@@ -34,7 +34,7 @@ public class Main {
 			);
 
 		System.out.println("= First Example =");
-		System.out.println(factorial.prettyPrint(0));
+		System.out.println(factorial.prettyPrint(0) + "\n");
 
 		System.out.println("= Second Example =");
 		System.out.println(mccarthy.prettyPrint(0));
