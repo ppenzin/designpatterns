@@ -6,8 +6,8 @@
  * gets this information.
  *
  * Author:   Heath Harrelson <harrel2@pdx.edu>
- * Created:  11/24/2009
- * Modified: 02/18/2013
+ * Created:  2009-11-24
+ * Modified: 2013-02-18
  *
  */
 

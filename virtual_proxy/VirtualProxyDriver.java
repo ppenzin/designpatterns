@@ -1,7 +1,8 @@
 /* VirtualProxyDriver.java: Driver program for Virtual Proxy demo.
  *
  * Author:   Heath Harrelson <harrel2@pdx.edu>
- * Modified: 02/18/2013
+ * Created:  2013-02-18
+ * Modified: 2013-02-18
  *
  */
 
