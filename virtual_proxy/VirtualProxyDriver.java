@@ -1,4 +1,4 @@
-/* VirtualProxyTest.java: Driver program for Virtual Proxy demo.
+/* VirtualProxyDriver.java: Driver program for Virtual Proxy demo.
  *
  * Author:   Heath Harrelson <harrel2@pdx.edu>
  * Modified: 02/18/2013
@@ -7,7 +7,7 @@
 
 import java.io.*;
 
-class VirtualProxyTest {
+class VirtualProxyDriver {
 	private static String status = "Enter your selection below.";
 
 	public static void main (String[] args) {
