@@ -27,6 +27,7 @@ class VirtualProxyDriver {
 		}
 	}
 
+	/* Displays the menu of actions the user can perform. */
 	static void printMenu () {
 		TerminalIO.clearScreen();
 		TerminalIO.seekTo(10, 10);
@@ -34,20 +35,26 @@ class VirtualProxyDriver {
 		TerminalIO.printHighlighted("Select an Option:");
 	}
 
+	/* Prints the user input prompt on the last line of the screen. */
 	static void printPrompt() {
 		TerminalIO.seekTo(TerminalIO.screenHeight(), 1);
 		TerminalIO.printHighlighted("Selection: ");
 	}
 
+	/* Set the text that will be printed on the program's status line. */
 	static void setStatus (String statusString) {
 		status = statusString;
 	}
 
+	/* Prints the status string just above the prompt, full width and with
+	 * reversed foreground / background colors. */
 	static void printStatus () {
 		TerminalIO.seekTo(TerminalIO.screenHeight() - 1, 1);
 		TerminalIO.printReverseVideo(TerminalIO.padStringToLineLength(" " + status));
 	}
 
+	/* Performs the action specified by the user's input, returning whether the
+	 * user wanted to quit. */
 	static boolean doSelection (String selection) {
 		if (selection.matches("((^[qQ]$)|^[Qq]uit$)"))
 			return true;
