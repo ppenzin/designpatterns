@@ -8,7 +8,6 @@
  */
 
 class ExpensiveObject implements ExpensiveObjectIF {
-
 	public ExpensiveObject () {
 		// Simulate extended instantiation / initialization
 		try {
