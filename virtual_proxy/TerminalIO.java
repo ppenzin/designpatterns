@@ -46,6 +46,14 @@ class TerminalIO {
 		return WIDTH;
 	}
 
+	/* Force a value to be within a range. */
+	private static int clampToRange (int value, int min, int max) {
+		value = Math.max(value, min);
+		value = Math.min(value, max);
+
+		return value;
+	}
+
 	/* Adds highlighting escape sequences to a String so it will be bold. */
 	public static String highlightString (String text) {
 		return BOLD + text + NORMAL;
@@ -90,11 +98,8 @@ class TerminalIO {
 
 	/* Seeks to line n and column m of the screen. */
 	public static void seekTo (int line, int column) {
-		int seekLine = line <= 0 ? 1 : line;
-		seekLine = line > HEIGHT ? HEIGHT : line;
-
-		int seekCol  = column <= 0 ? 1 : column;
-		seekCol  = column > WIDTH ? WIDTH : column;
+		int seekLine = clampToRange(line, 1, HEIGHT);
+		int seekCol  = clampToRange(column, 1, WIDTH);
 
 		System.out.print(ESC + seekLine + ";" + seekCol + "H");
 
