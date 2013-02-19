@@ -10,6 +10,7 @@ import java.io.*;
 
 class VirtualProxyDriver {
 	private ExpensiveObjectIF expensiveThing;
+	private ExpensiveObjectIF missingThing;
 
 	public static void main (String[] args) {
 		VirtualProxyDriver driverObject = new VirtualProxyDriver();
@@ -18,6 +19,7 @@ class VirtualProxyDriver {
 
 	public VirtualProxyDriver () {
 		expensiveThing = new ExpensiveObjectProxy();
+		missingThing   = new MissingObjectProxy();
 	}
 
 	/* Enter the program's main loop, which will run until the user tells us
@@ -104,7 +106,7 @@ class VirtualProxyDriver {
 				doOtherSlowThing();
 				break;
 			case "4":
-				printStatus("Should crash here.");
+				printStatus("Get ready to crash...");
 				doMissingThing();
 				break;
 			default:
@@ -131,6 +133,7 @@ class VirtualProxyDriver {
 	/* Calls action1() on the proxy for the missing class. This will cause the
 	 * program to crash. */
 	private void doMissingThing () {
-		// FIXME
+		printStatus("Doing action1() on missing object...");
+		missingThing.action1();
 	}
 }
