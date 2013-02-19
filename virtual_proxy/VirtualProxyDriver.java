@@ -9,71 +9,128 @@
 import java.io.*;
 
 class VirtualProxyDriver {
-	private static String status = "Enter your selection below.";
+	private ExpensiveObjectIF expensiveThing;
 
 	public static void main (String[] args) {
+		VirtualProxyDriver driverObject = new VirtualProxyDriver();
+		driverObject.enterMainLoop();
+	}
+
+	public VirtualProxyDriver () {
+		expensiveThing = new ExpensiveObjectProxy();
+	}
+
+	/* Enter the program's main loop, which will run until the user tells us
+	 * to quit. */
+	public void enterMainLoop () {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String optionSelected = "";
+
+		TerminalIO.clearScreen();
 
 		boolean userQuit = false;
 		while (!userQuit) {
 			printMenu();
-			printStatus();
-			printPrompt();
+			printStatus("Enter your selection below.");
+			printPrompt("Selection: ");
 
 			try {
 				optionSelected = in.readLine();
 			} catch (IOException ioe) { }
+
 			userQuit = doSelection(optionSelected);
-		}
+		}		
 	}
 
 	/* Displays the menu of actions the user can perform. */
-	static void printMenu () {
-		TerminalIO.clearScreen();
-		TerminalIO.seekTo(10, 10);
+	private void printMenu () {
+		String[] options = { "Fast operation", "Slow operation", "Slow operation 2",
+							 "Missing operation" };
+		int menuLine = 10;
 
+		// Print the menu header
+		TerminalIO.clearScreen();
+		TerminalIO.seekTo(menuLine, 10);
 		TerminalIO.printHighlighted("Select an Option:");
+		menuLine += 2;
+
+		// Print each menu item
+		for (int i = 0; i < options.length; i++, menuLine += 2) {
+			TerminalIO.seekTo(menuLine, 12);
+			TerminalIO.printPlain(String.format("%d) %s", i + 1, options[i]));
+		}
+
+		TerminalIO.seekTo(menuLine, 12);
+		TerminalIO.printPlain("Q) Quit the program");
 	}
 
 	/* Prints the user input prompt on the last line of the screen. */
-	static void printPrompt() {
+	private void printPrompt(String prompt) {
 		TerminalIO.seekTo(TerminalIO.screenHeight(), 1);
-		TerminalIO.printHighlighted("Selection: ");
+		TerminalIO.printHighlighted(prompt);
 	}
 
-	/* Set the text that will be printed on the program's status line. */
-	static void setStatus (String statusString) {
-		status = statusString;
-	}
+	/* Sets and prints the status string in one call. */
+	private void printStatus (String status) {
+		int lastLine = TerminalIO.screenHeight();
 
-	/* Prints the status string just above the prompt, full width and with
-	 * reversed foreground / background colors. */
-	static void printStatus () {
+		// clear second-to-last line to prevent status prior to first long
+		// operation remaining on the screen (don't know why this happens)
+		TerminalIO.seekTo(TerminalIO.screenHeight() - 2, 1);
+		TerminalIO.clearLine();
+
+		// clear, then print the status line
 		TerminalIO.seekTo(TerminalIO.screenHeight() - 1, 1);
+		TerminalIO.clearLine();
 		TerminalIO.printReverseVideo(TerminalIO.padStringToLineLength(" " + status));
 	}
 
 	/* Performs the action specified by the user's input, returning whether the
 	 * user wanted to quit. */
-	static boolean doSelection (String selection) {
+	private boolean doSelection (String selection) {
 		if (selection.matches("((^[qQ]$)|^[Qq]uit$)"))
 			return true;
 
+		printPrompt("Wait...");
+
 		switch (selection) {
 			case "1":
-				setStatus("Did fast thing. Please select again.");
+				printStatus("Did fast thing. Please select again.");
 				break;
 			case "2":
-				setStatus("Did slow thing. Please select again.");
+				doSlowThing();
 				break;
 			case "3":
-				setStatus("Should crash here.");
+				doOtherSlowThing();
+				break;
+			case "4":
+				printStatus("Should crash here.");
+				doMissingThing();
 				break;
 			default:
-				setStatus("Invalid option \"" + selection + "\". Please select again.");
+				printStatus("Invalid option \"" + selection + "\". Please select again.");
 		}
 
 		return false;
+	}
+
+	/* Calls action1() on the proxy object. If the expensive object hasn't been
+	 * instantiated yet, this will result in a delay. */
+	private void doSlowThing () {
+		printStatus("Doing action1() on expensive object...");
+		expensiveThing.action1();
+	}
+
+	/* Calls action2() on the proxy object. If the expensive object hasn't been
+	 * instantiated yet, this will result in a delay. */
+	private void doOtherSlowThing () {
+		printStatus("Doing action2() on expensive object...");
+		expensiveThing.action2();
+	}
+
+	/* Calls action1() on the proxy for the missing class. This will cause the
+	 * program to crash. */
+	private void doMissingThing () {
+		// FIXME
 	}
 }
