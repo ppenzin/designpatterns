@@ -15,11 +15,7 @@ class ExpensiveObject implements ExpensiveObjectIF {
 		} catch (InterruptedException ie) { }
 	}
 
-	public void action1 () {
+	public void action1 () { }
 
-	}
-
-	public void action2 () {
-
-	}
+	public void action2 () { }
 }
