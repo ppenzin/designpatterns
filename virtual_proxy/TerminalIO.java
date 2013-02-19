@@ -16,6 +16,7 @@ class TerminalIO {
 	private static final String NORMAL = ESC + "0m";
 	private static final String BOLD = ESC + "1m";
 	private static final String CLEAR = ESC + "2J";
+	private static final String CLEAR_LINE = ESC + "0K";
 	private static final String SEEK_TOP = ESC + "1;1H";
 	private static final String REVERSE_VIDEO = ESC + "7m";
 
@@ -100,6 +101,12 @@ class TerminalIO {
 
 		currentRow = 1;
 		currentCol = 1;
+	}
+
+	/* Clears from the cursor position to the end of the line. */
+	public static void clearLine () {
+		System.out.print(CLEAR_LINE);
+		System.out.flush();
 	}
 
 	/* Seeks to line n and column m of the screen. */
