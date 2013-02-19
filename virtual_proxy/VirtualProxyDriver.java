@@ -12,6 +12,8 @@ class VirtualProxyDriver {
 	private ExpensiveObjectIF expensiveThing;
 	private ExpensiveObjectIF missingThing;
 
+	private String status = "Enter your selection below.";
+
 	public static void main (String[] args) {
 		VirtualProxyDriver driverObject = new VirtualProxyDriver();
 		driverObject.enterMainLoop();
@@ -33,7 +35,7 @@ class VirtualProxyDriver {
 		boolean userQuit = false;
 		while (!userQuit) {
 			printMenu();
-			printStatus("Enter your selection below.");
+			printStatus();
 			printPrompt("Selection: ");
 
 			try {
@@ -74,6 +76,12 @@ class VirtualProxyDriver {
 
 	/* Sets and prints the status string in one call. */
 	private void printStatus (String status) {
+		this.status = status;
+		printStatus();
+	}
+
+	/* Prints out the status line. */
+	private void printStatus () {
 		int lastLine = TerminalIO.screenHeight();
 
 		// clear second-to-last line to prevent status prior to first long
@@ -101,9 +109,11 @@ class VirtualProxyDriver {
 				break;
 			case "2":
 				doSlowThing();
+				printStatus("Did action1() on expensive object. Please select again.");
 				break;
 			case "3":
 				doOtherSlowThing();
+				printStatus("Did action2() on expensive object. Please select again.");
 				break;
 			case "4":
 				printStatus("Get ready to crash...");
