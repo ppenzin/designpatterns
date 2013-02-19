@@ -14,15 +14,16 @@ class MissingObjectProxy implements ExpensiveObjectIF {
 	private ExpensiveObjectIF realObject;
 
 	private void loadRealObject () {
-		try {
-			URL[] classPath = { new URL("file:") };
-			URLClassLoader classLoader = new URLClassLoader(classPath);
-			Class realObjectClass = classLoader.loadClass("MissingObject");
-			realObject = (ExpensiveObjectIF) realObjectClass.newInstance();
-		} catch (Exception e) {
-			// Couldn't load the class for realObject
-			throw new RuntimeException();
-		}
+		realObject = new MissingObject();
+		// try {
+		// 	URL[] classPath = { new URL("file:") };
+		// 	URLClassLoader classLoader = new URLClassLoader(classPath);
+		// 	Class realObjectClass = classLoader.loadClass("MissingObject");
+		// 	realObject = (ExpensiveObjectIF) realObjectClass.newInstance();
+		// } catch (Exception e) {
+		// 	// Couldn't load the class for realObject
+		// 	throw new RuntimeException();
+		// }
 	}
 
 	public void action1 () {

@@ -13,15 +13,18 @@ class ExpensiveObjectProxy implements ExpensiveObjectIF {
 	private ExpensiveObjectIF realObject;
 
 	private void loadRealObject () {
-		try {
-			URL[] classPath = { new URL("file:") };
-			URLClassLoader classLoader = new URLClassLoader(classPath);
-			Class realObjectClass = classLoader.loadClass("ExpensiveObject");
-			realObject = (ExpensiveObjectIF) realObjectClass.newInstance();
-		} catch (Exception e) {
-			// Couldn't load the class for realObject
-			throw new RuntimeException();
-		}
+		realObject = new ExpensiveObject();
+		
+		// Load the object to be proxied via Dynamic Linkage.
+		// try {
+		// 	URL[] classPath = { new URL("file:") };
+		// 	URLClassLoader classLoader = new URLClassLoader(classPath);
+		// 	Class realObjectClass = classLoader.loadClass("ExpensiveObject");
+		// 	realObject = (ExpensiveObjectIF) realObjectClass.newInstance();
+		// } catch (Exception e) {
+		// 	// Couldn't load the class for realObject
+		// 	throw new RuntimeException();
+		// }
 	}
 
 	public void action1 () {
