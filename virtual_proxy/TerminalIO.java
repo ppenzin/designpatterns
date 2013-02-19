@@ -72,6 +72,12 @@ class TerminalIO {
 		return text + padding;
 	}
 
+	/* Prints a string to the terminal using default text. */
+	public static void printPlain (String text) {
+		System.out.print(text);
+		System.out.flush();
+	}
+
     /* Prints a string to the terminal using bold text by using ANSI terminal
      * escape sequences. */
 	public static void printHighlighted (String text) {
