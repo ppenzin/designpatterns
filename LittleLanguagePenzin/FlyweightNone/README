@@ -1,0 +1,5 @@
+to build run ./b
+to run ./r
+
+Note: Interpretation won't work, because values of variables are not shared.
+
