@@ -1,0 +1,20 @@
+package pattpack.expr_none;
+
+import java.io.*;
+
+/**
+ *  This class represents an expression of the "while" language.
+ *  Currently, expressions are empty.
+ */
+public interface Expr {
+    /**
+     *  Print this expression.
+     *  @param out The stream where the expression is printed.
+     */
+    void print (PrintStream out);
+    /**
+     *  Evaluate the expression
+     *  won't work, because of the lack of environment
+     */
+    public int eval();
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Nice little script to run all that Java stuff 
+
+java -cp build Main

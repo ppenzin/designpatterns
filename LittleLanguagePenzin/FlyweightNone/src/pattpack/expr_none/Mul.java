@@ -1,0 +1,35 @@
+package pattpack.expr_none;
+
+import java.io.*;
+ 
+/**
+ *  This class represents an multiplication expression.
+ */
+public class Mul implements Expr {
+    private Expr left, right;
+    /**
+     *  Construct an multiplication expression.
+     *  @param left The left operand.
+     *  @param right The right operand.
+     */
+    public Mul (Expr left, Expr right) { this.left = left; this.right = right; }
+    /**
+     *  Print this expression.
+     *  @param out The stream where the expression is printed.
+     */
+    public void print (PrintStream out) {
+	out.print ("*(");
+	left.print (out);
+	out.print (",");
+	right.print (out);
+	out.print (")");
+    }
+
+    /**
+     *  Evaluate the expression
+     *  won't work, because of the lack of environment
+     */
+    public int eval() {
+        return (left.eval() * right.eval());
+    }
+}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Nice little script to build all that Java stuff 
+
+pushd src
+javac -d ../build pattpack/expr_none/*.java
+javac -d ../build pattpack/ast_none/*.java
+javac -d ../build Main.java
+popd
