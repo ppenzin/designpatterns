@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set +x
+
+# Nice little script to build all that Java stuff 
+
+pushd src
+javac -d ../build pattpack/color/*.java
+javac -d ../build pattpack/othello/*.java
+javac -d ../build Main.java
+popd

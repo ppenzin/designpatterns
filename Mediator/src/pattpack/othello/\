@@ -1,0 +1,44 @@
+package pattpack.othello;
+
+import pattpack.color.*;
+
+/* Stride Left iterator. */
+public class StrideLeft extends StrideIF {
+    private Square sq;
+    private ColorIF color;
+
+    private StrideLeft() {};
+
+    public StrideLeft(Square sq, ColorIF color) {
+        this.sq = sq;
+        this.color = color;
+    }
+    private void Next() {
+        sq = sq.getLeft();
+    }
+    private void checkTail() throws NotByTheRulesException {
+        Next();
+        /* A break in the line */    
+        if (sq == null || sq.getColor() == null)
+            throw(new NotByTheRulesException("Break in the line"));
+        /* End of the line */
+        if (sq.getColor == color)
+            return;
+        /* Still consuming the opposite color */
+        checkTail();
+        sq.setColor(color);
+    }
+    public boolean check() {
+        /* No/wrong color */
+        if (sq = null || sq.getColor() == null || sq.getColor() == color)
+            return false;
+        /* Check tail */
+        try {
+            checkTail();
+        } catch (NotByTheRulesException ignore) {
+            return false;
+        }
+        sq.setColor(color);
+        return true;
+    }
+}
