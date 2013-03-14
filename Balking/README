@@ -1,0 +1,12 @@
+Balking pattern example. Heavily based on Dr. Antoy's solution. 
+There is some alternative code (commented out), that one can 
+use in BubbleRunner.
+
+To build 
+    Nix: ./b
+    Windows: build.bat
+
+To run 
+    Nix: ./r
+    Windows: run.bat
+

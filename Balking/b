@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set +x
+
+# Nice little script to build all that Java stuff 
+
+pushd src
+javac -d ../build Main.java
+popd

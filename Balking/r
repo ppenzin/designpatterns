@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Nice little script to run our Java applet
+
+appletviewer Bubble.htm
+#java -cp build Main
