@@ -19,7 +19,7 @@ public class Player {
     public ColorIF getColor() { return null; };
 
     /* Move is negotiated */
-    public void move(int col, int row) throws NotByTheRulesException {
-        director.makeMove(col, row, this);
+    public void move(int row, int col) throws NotByTheRulesException {
+        director.makeMove(row, col, this);
     }
 }

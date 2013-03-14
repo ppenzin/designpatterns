@@ -1,7 +1,7 @@
 import pattpack.color.*;
 import pattpack.othello.*;
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *  Driver for a Mediator pattern example.
@@ -9,57 +9,54 @@ import java.util.Scanner;
  */
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    /* Board (mediator of the game) */
-    private static Board board;
 
-    /** Function to create classic Othello layout. 8x8 with 4 chips set in the
-     *  middle (diagonally) 
-     */
-    private static Square [][] makeClassicLayout() {
-        final int rows = 8;
-        final int cols = 8;
-        Square [][] squares = new Square[rows][cols];
-        for (int row = 0; row < rows; ++row) {
-            for (int col = 0; col < cols; ++col) {
-                /* Set the color layout */
-                if ((row == 3 && col == 3) || (row == 4 && col == 4))
-                    squares[col][row] = new Square(White.getInstance(), board);
-                else if ((row == 3 && col == 4) || (row == 4 && col == 3))
-                    squares[col][row] = new Square(Black.getInstance(), board);
-                else
-                    squares[col][row] = new Square(null, board);
-            }
-        }
-        return squares;
-    }
     /** Usual entry point. */
     public static void main (String [] arg) {
         int col,row;
+        /* Board (mediator of the game) */
+        Board board;
+
         /* Initialize and print the board */
-        board = new Board(makeClassicLayout());
+        board = new Board();
         System.out.println(board);
 
         /* Make moves */
         while(true) {
             /* Light */
-            System.out.print("Light: ");
-            col = scanner.nextInt();
-            row = scanner.nextInt();
-            try {
-                board.getPlayerWhite().move(col, row);
-            } catch (NotByTheRulesException e) {
-                System.out.println(e.getMessage());
+            while (true) {
+                try {
+                    System.out.print("Light(row,col): ");
+                    row = scanner.nextInt();
+                    col = scanner.nextInt();
+                    board.getPlayerWhite().move(row, col);
+                    break;
+                } catch (NotByTheRulesException e) {
+                    System.out.println(e.getMessage() + " Try again.");
+                    continue;
+                } catch (InputMismatchException e) {
+                    System.out.println("Need an integer pair, separated by whitespace, try again.");
+                    scanner.skip(".*");
+                    continue;
+                }
             }
             /* Print board and score */
             System.out.println(board);
             /* Dark */
-            System.out.print("Dark: ");
-            col = scanner.nextInt();
-            row = scanner.nextInt();
-            try {
-                board.getPlayerBlack().move(col, row);
-            } catch (NotByTheRulesException e) {
-                System.out.println(e.getMessage());
+            while (true) {
+                try {
+                    System.out.print("Dark(row,col): ");
+                    row = scanner.nextInt();
+                    col = scanner.nextInt();
+                    board.getPlayerBlack().move(row, col);
+                    break;
+                } catch (NotByTheRulesException e) {
+                    System.out.println(e.getMessage() + " Try again.");
+                    continue;
+                } catch (InputMismatchException e) {
+                    System.out.println("Need an integer pair, separated by whitespace, try again.");
+                    scanner.skip(".*");
+                    continue;
+                }
             }
             /* Print board and score */
             System.out.println(board);
